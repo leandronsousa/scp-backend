@@ -16,4 +16,6 @@ public interface PessoaRepository extends CrudRepository<Pessoa, Long> {
 
 	public boolean existsByCpf(String cpf);
 	
+	public boolean existsByIdNotAndCpf(Long id, String cpf);
+	
 }

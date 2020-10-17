@@ -48,8 +48,35 @@ public interface IPessoaController {
 		    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
 		})
 	@ApiOperation(value = SwaggerConstantes.INCLUIR_PESSOA)
-	ResponseEntity<PessoaDTO> incluirPessoa(
+	ResponseEntity<?> incluirPessoa(
 			@ApiParam(value = SwaggerConstantes.PESSOA_PARA_INCLUSAO) PessoaDTO pessoaDTO, 
 			UriComponentsBuilder uriBuilder);
 
+	/**
+	 * Metodo da API responsavel por alterar uma pessoa
+	 * 
+	 * @param pessoaDTO
+	 * @return
+	 */
+	@ApiResponses(value = {
+		    @ApiResponse(code = 200, message = SwaggerConstantes.PESSOA_ALTERADA_SUCESSO),
+		    @ApiResponse(code = 403, message = SwaggerConstantes.SEM_PERMISSAO),
+		    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
+		})
+	@ApiOperation(value = SwaggerConstantes.ALTERAR_PESSOA)
+	ResponseEntity<?> alterarPessoa(@ApiParam(value = SwaggerConstantes.PESSOA_PARA_ALTERACAO) PessoaDTO pessoaDTO);
+	
+	/**
+	 * Metodo da API responsavel por excluir uma pessoa
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@ApiResponses(value = {
+		    @ApiResponse(code = 200, message = SwaggerConstantes.PESSOA_EXCLUIDA_SUCESSO),
+		    @ApiResponse(code = 403, message = SwaggerConstantes.SEM_PERMISSAO),
+		    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
+		})
+	@ApiOperation(value = SwaggerConstantes.EXCLUIR_PESSOA)
+	ResponseEntity<?> excluirPessoa(@ApiParam(value = SwaggerConstantes.ID_PESSOA) Long id);
 }

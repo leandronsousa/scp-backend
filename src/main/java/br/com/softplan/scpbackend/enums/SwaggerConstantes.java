@@ -4,6 +4,10 @@ public class SwaggerConstantes {
 	
 	private SwaggerConstantes() {
 	}
+	
+	public static final String NAO_ENCONTRADO = "Não encontrado";
+	public static final String SEM_PERMISSAO = "Sem permissão";
+	public static final String ERRO_INTERNO = "Erro interno";
 
 	public static final String API_PESSOA = "API referente a Pessoa";
 	public static final String CONSULTA_LISTA_PESSOAS = "Consulta lista de Pessoas";
@@ -21,8 +25,10 @@ public class SwaggerConstantes {
 	public static final String PESSOA_INCLUIDA_SUCESSO = "Pessoa incluída com sucesso";
 	public static final String PESSOA_PARA_INCLUSAO = "Pessoa para inclusão";
 	public static final String INCLUIR_PESSOA = "Incluir Pessoa";
+	public static final String PESSOA_PARA_ALTERACAO = "Pessoa para alteração";
+	public static final String ALTERAR_PESSOA = "Alterar Pessoa";
+	public static final String PESSOA_ALTERADA_SUCESSO = "Pessoa altera com sucesso";
+	public static final String PESSOA_EXCLUIDA_SUCESSO = "Pessoa excluída com sucesso";
+	public static final String EXCLUIR_PESSOA = "Excluir Pessoa";
 
-	public static final String NAO_ENCONTRADO = "Não encontrado";
-	public static final String SEM_PERMISSAO = "Sem permissão";
-	public static final String ERRO_INTERNO = "Erro interno";
 }
