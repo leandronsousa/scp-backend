@@ -29,9 +29,10 @@ public class Pessoa {
 	
 	private String email;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 11)
 	private String cpf;
 	
+	@Column(name = "DATANASCIMENTO")
 	private LocalDate dataNascimento;
 	
 	private String naturalidade;

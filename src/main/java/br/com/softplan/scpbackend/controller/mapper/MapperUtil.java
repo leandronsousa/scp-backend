@@ -1,5 +1,6 @@
 package br.com.softplan.scpbackend.controller.mapper;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MapperUtil {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static List map(final MapperFacade mapper, final List source, final Class destType) {
 		if (mapper != null && source != null) {
-			List dest = Collections.EMPTY_LIST;
+			List dest = new ArrayList();
 			dest.addAll(mapper.mapAsList(source, destType));
 			return dest;
 		}
