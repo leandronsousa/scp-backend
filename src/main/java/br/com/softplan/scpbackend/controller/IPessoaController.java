@@ -1,9 +1,6 @@
 package br.com.softplan.scpbackend.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.softplan.scpbackend.controller.dto.PessoaDTO;
 import br.com.softplan.scpbackend.enums.SwaggerConstantes;
@@ -33,7 +30,21 @@ public interface IPessoaController {
 	    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
 	})
 	@ApiOperation(value = SwaggerConstantes.CONSULTA_LISTA_PESSOAS)
-	ResponseEntity<List<PessoaDTO>> listarPessoas();
+	ResponseEntity<?> listarPessoas();
+	
+	/**
+	 * Metodo da API responsavel por recuperar pessoa por ID
+	 * 
+	 * @return
+	 */
+	@ApiResponses(value = {
+	    @ApiResponse(code = 200, message = SwaggerConstantes.RETORNA_PESSOA),
+	    @ApiResponse(code = 403, message = SwaggerConstantes.SEM_PERMISSAO),
+	    @ApiResponse(code = 404, message = SwaggerConstantes.NAO_ENCONTRADO),
+	    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
+	})
+	@ApiOperation(value = SwaggerConstantes.CONSULTA_PESSOA_ID)
+	ResponseEntity<?> recuperarPessoaPorId(@ApiParam(value = SwaggerConstantes.ID_PESSOA) Long id);
 	
 	/**
 	 * Metodo da API responsavel por incluir uma pessoa
@@ -49,8 +60,7 @@ public interface IPessoaController {
 		})
 	@ApiOperation(value = SwaggerConstantes.INCLUIR_PESSOA)
 	ResponseEntity<?> incluirPessoa(
-			@ApiParam(value = SwaggerConstantes.PESSOA_PARA_INCLUSAO) PessoaDTO pessoaDTO, 
-			UriComponentsBuilder uriBuilder);
+			@ApiParam(value = SwaggerConstantes.PESSOA_PARA_INCLUSAO) PessoaDTO pessoaDTO);
 
 	/**
 	 * Metodo da API responsavel por alterar uma pessoa

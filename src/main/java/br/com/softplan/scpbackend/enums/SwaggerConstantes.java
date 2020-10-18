@@ -10,7 +10,7 @@ public class SwaggerConstantes {
 	public static final String ERRO_INTERNO = "Erro interno";
 
 	public static final String API_PESSOA = "API referente a Pessoa";
-	public static final String CONSULTA_LISTA_PESSOAS = "Consulta lista de Pessoas";
+	public static final String CONSULTA_LISTA_PESSOAS = "Consultar lista de Pessoas";
 	public static final String RETORNA_LISTA_PESSOAS = "Retorna lista de Pessoas";
 	public static final String MODEL_PESSOA = "Modelo Pessoa";
 	public static final String ID_PESSOA = "Identificador da Pessoa";
@@ -30,5 +30,16 @@ public class SwaggerConstantes {
 	public static final String PESSOA_ALTERADA_SUCESSO = "Pessoa altera com sucesso";
 	public static final String PESSOA_EXCLUIDA_SUCESSO = "Pessoa excluída com sucesso";
 	public static final String EXCLUIR_PESSOA = "Excluir Pessoa";
+	public static final String EXEMPLO_DATA_NASCIMENTO = "1988-01-31";
+	public static final String EXEMPLO_NACIONALIDADE = "Brasileiro";
+	public static final String EXEMPLO_NATURALIDADE = "Brasília - DF";
+	public static final String EXEMPLO_DATA_CADASTRO = "2020-10-15";
+	public static final String EXEMPLO_ID = "1";
+	public static final String EXEMPLO_NOME = "Leandro";
+	public static final String EXEMPLO_CPF = "58192578046";
+	public static final String EXEMPLO_SEXO = "Masculino";
+	public static final String EXEMPLO_EMAIL = "leandronsousa@gmail.com";
+	public static final String RETORNA_PESSOA = "Retorna pessoa consultada pelo seu identificador";
+	public static final String CONSULTA_PESSOA_ID = "Consultar pessoa por ID";
 
 }

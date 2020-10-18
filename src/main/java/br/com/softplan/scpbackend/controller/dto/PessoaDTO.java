@@ -1,41 +1,38 @@
 package br.com.softplan.scpbackend.controller.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import br.com.softplan.scpbackend.enums.SwaggerConstantes;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModelProperty.AccessMode;
 
 @ApiModel(value = SwaggerConstantes.MODEL_PESSOA)
 public class PessoaDTO {
 
-	@ApiModelProperty(value = SwaggerConstantes.ID_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.ID_PESSOA, accessMode = AccessMode.READ_ONLY, dataType = "number", example = SwaggerConstantes.EXEMPLO_ID)
 	private Long id;
 
-	@ApiModelProperty(value = SwaggerConstantes.NOME_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.NOME_PESSOA, dataType = "string", example = SwaggerConstantes.EXEMPLO_NOME)
 	private String nome;
 
-	@ApiModelProperty(value = SwaggerConstantes.SEXO_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.SEXO_PESSOA, dataType = "string", example = SwaggerConstantes.EXEMPLO_SEXO)
 	private String sexo;
 	
-	@ApiModelProperty(value = SwaggerConstantes.EMAIL_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.EMAIL_PESSOA, dataType = "string", example = SwaggerConstantes.EXEMPLO_EMAIL)
 	private String email;
 
-	@ApiModelProperty(value = SwaggerConstantes.CPF_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.CPF_PESSOA, dataType = "string", example = SwaggerConstantes.EXEMPLO_CPF)
 	private String cpf;
 	
-	@ApiModelProperty(value = SwaggerConstantes.DATANASCIMENTO_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.DATANASCIMENTO_PESSOA, dataType = "date", example = SwaggerConstantes.EXEMPLO_DATA_NASCIMENTO)
 	private LocalDate dataNascimento;
 
-	@ApiModelProperty(value = SwaggerConstantes.NATURALIDADE_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.NATURALIDADE_PESSOA, dataType = "string", example = SwaggerConstantes.EXEMPLO_NATURALIDADE)
 	private String naturalidade;
 	
-	@ApiModelProperty(value = SwaggerConstantes.NACIONALIDADE_PESSOA)
+	@ApiModelProperty(value = SwaggerConstantes.NACIONALIDADE_PESSOA, dataType = "string", example = SwaggerConstantes.EXEMPLO_NACIONALIDADE)
 	private String nacionalidade;
-
-	@ApiModelProperty(value = SwaggerConstantes.DATACADASTRO_PESSOA)
-	private LocalDateTime dataCadastro;
 
 	public Long getId() {
 		return id;
@@ -99,14 +96,6 @@ public class PessoaDTO {
 
 	public void setNacionalidade(String nacionalidade) {
 		this.nacionalidade = nacionalidade;
-	}
-
-	public LocalDateTime getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDateTime dataCadastro) {
-		this.dataCadastro = dataCadastro;
 	}
 
 }

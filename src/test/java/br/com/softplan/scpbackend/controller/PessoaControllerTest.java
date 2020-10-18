@@ -59,7 +59,7 @@ public class PessoaControllerTest extends ScpBackendApplicationTests {
 	public void testAlterarPessoa() throws Exception {
 		PessoaDTO mockPessoa = getMockPessoa();
 		mockPessoa.setId(1L);
-		this.mockMvc.perform(MockMvcRequestBuilders.put("/pessoas")
+		this.mockMvc.perform(MockMvcRequestBuilders.patch("/pessoas")
 				.content(objectMapper.writeValueAsString(mockPessoa))
 				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
 		.andExpect(MockMvcResultMatchers.status().isOk());
@@ -67,10 +67,15 @@ public class PessoaControllerTest extends ScpBackendApplicationTests {
 	
 	@Test
 	@Order(4)
+	public void testConsultarPessoaPorId() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/pessoas/1")).andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
+	@Test
+	@Order(5)
 	public void testExcluirPessoa() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.delete("/pessoas")
-				.param("id", "1"))
-		.andExpect(MockMvcResultMatchers.status().isOk());
+		this.mockMvc.perform(MockMvcRequestBuilders.delete("/pessoas/1"))
+		.andExpect(MockMvcResultMatchers.status().isNoContent());
 	}
 	
 	private PessoaDTO getMockPessoa() {

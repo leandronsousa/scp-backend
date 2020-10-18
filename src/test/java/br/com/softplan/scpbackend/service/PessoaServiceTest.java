@@ -173,6 +173,26 @@ public class PessoaServiceTest {
 		Pessoa pessoaSalva = service.alterar(pessoa);
 		assertEquals(pessoaAlteracao.getNome(), pessoaSalva.getNome());
 	}
+	
+	@Test
+	public void testRecuperarPessoaNaoEncontrada() throws ScpNegocioException {
+		when(repository.findById(anyLong())).thenReturn(Optional.ofNullable(null));
+		Exception exception = assertThrows(PessoaNaoEncontradaException.class, () -> {
+	        service.recuperarPorId(anyLong());
+	    });
+		String mensagemEsperada = Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getProperty();
+	    String mensagemRetornada = exception.getMessage();
+		assertTrue(mensagemRetornada.contains(mensagemEsperada));
+	}
+	
+	@Test
+	public void testRecuperarPessoaSucesso() throws ScpNegocioException {
+		Pessoa pessoa = getMockPessoa();
+		pessoa.setId(1L);
+		when(repository.findById(anyLong())).thenReturn(Optional.of(pessoa));
+		Pessoa pessoaRecuperada = service.recuperarPorId(anyLong());
+		assertEquals(pessoa.getId(), pessoaRecuperada.getId());
+	}
 
 	private Pessoa getMockPessoa() {
 		Pessoa pessoa = new Pessoa();

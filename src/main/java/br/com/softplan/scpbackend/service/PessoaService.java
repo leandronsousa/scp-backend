@@ -130,6 +130,7 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 	}
 
 	private void prepararPessoaParaAlteracao(Pessoa pessoa, Pessoa pessoaCadastrada) {
+		pessoaCadastrada.setNome(pessoa.getNome());
 		pessoaCadastrada.setCpf(RegExUtils.removePattern(pessoa.getCpf(), PatternsEnum.SOMENTE_NUMEROS.getPattern()));
 		pessoaCadastrada.setDataAtualizacao(LocalDateTime.now());
 		pessoaCadastrada.setDataNascimento(pessoa.getDataNascimento());
