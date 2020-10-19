@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.softplan.scpbackend.controller.dto.UsuarioDTO;
 import br.com.softplan.scpbackend.controller.mapper.UsuarioMapper;
 import br.com.softplan.scpbackend.entity.Usuario;
+import br.com.softplan.scpbackend.enums.SwaggerConstantes;
 
 @RestController
 @RequestMapping(value = "/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -20,7 +21,7 @@ public class UsuarioController {
 	public ResponseEntity<?> autenticar(@RequestBody UsuarioDTO usuarioDTO) {
 		try {
 			if (!usuarioDTO.getLogin().equals("leandro") || !usuarioDTO.getSenha().equals("123456")) {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(SwaggerConstantes.USUARIO_NAO_AUTENTICADO);
 			}
 			Usuario usuario = new Usuario();
 			usuario.setId(1L);

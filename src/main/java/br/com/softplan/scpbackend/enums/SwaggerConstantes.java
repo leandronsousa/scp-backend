@@ -50,7 +50,7 @@ public class SwaggerConstantes {
 	public static final String EXEMPLO_SENHA = "123465";
 	public static final String USUARIO_SENHA = "Senha do Usuário";
 	public static final String USUARIO_AUTENTICADO_SUCESSO = "Usuário autenticado com sucesso";
-	public static final String USUARIO_NAO_AUTENTICADO = "Usuário não autenticado";
+	public static final String USUARIO_NAO_AUTENTICADO = "Usuário ou senha incorretos";
 	public static final String AUTENTICAR_USUARIO = "Autenticar Usuário";
 
 }
