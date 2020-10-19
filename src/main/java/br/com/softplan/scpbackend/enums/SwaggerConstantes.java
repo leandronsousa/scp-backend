@@ -42,4 +42,15 @@ public class SwaggerConstantes {
 	public static final String RETORNA_PESSOA = "Retorna pessoa consultada pelo seu identificador";
 	public static final String CONSULTA_PESSOA_ID = "Consultar pessoa por ID";
 
+	
+	public static final String API_USUARIO = "API referente ao Usuário";
+	public static final String EXEMPLO_LOGIN = "leandro";
+	public static final String USUARIO_LOGIN = "Login do Usuário";
+	public static final String MODEL_USUARIO = "Modelo do Usuário";
+	public static final String EXEMPLO_SENHA = "123465";
+	public static final String USUARIO_SENHA = "Senha do Usuário";
+	public static final String USUARIO_AUTENTICADO_SUCESSO = "Usuário autenticado com sucesso";
+	public static final String USUARIO_NAO_AUTENTICADO = "Usuário não autenticado";
+	public static final String AUTENTICAR_USUARIO = "Autenticar Usuário";
+
 }
