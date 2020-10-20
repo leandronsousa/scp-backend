@@ -1,1 +1,3 @@
-Endereço da aplicação http://localhost:8080/
+Endereço local da aplicação  http://localhost:8080/
+
+Swagger http://localhost:8080/swagger-ui/index.html
