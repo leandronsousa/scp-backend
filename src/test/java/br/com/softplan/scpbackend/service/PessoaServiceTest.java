@@ -75,7 +75,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getTexto();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_INVALIDO.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -141,6 +141,8 @@ public class PessoaServiceTest {
 	public void testAlterarPessoaCpfJaCadastrado() throws Exception {
 		Pessoa pessoa = getMockPessoa();
 		pessoa.setId(1L);
+		when(repository.findById(anyLong())).thenReturn(Optional.of(pessoa));
+		when(repository.existsByIdNotAndCpf(anyLong(), anyString())).thenReturn(true);
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.alterar(pessoa);
 	    });
