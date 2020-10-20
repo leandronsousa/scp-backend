@@ -43,7 +43,7 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 			throw e;
 		} catch (Exception e) {
 			LOGGER.error(e.getLocalizedMessage());
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_ERRO_INCLUIR.getProperty()); 
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_ERRO_INCLUIR.getTexto()); 
 		}
 	}
 
@@ -65,19 +65,19 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 
 	private void validarDataNascimentoPreenchida(LocalDate dataNascimento) throws ScpNegocioException {
 		if (dataNascimento == null) {
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getProperty());
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getTexto());
 		}
 	}
 
 	private void validarDataNascimentoMaiorDataAtual(LocalDate dataNascimento) throws ScpNegocioException {
 		if (dataNascimento.isAfter(LocalDate.now())) {
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getProperty());
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getTexto());
 		}
 	}
 
 	private void validarNomePessoa(String nome) throws ScpNegocioException {
 		if (StringUtils.isBlank(nome)) {
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_NOME_NAO_PREENCHIDO.getProperty());
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_NOME_NAO_PREENCHIDO.getTexto());
 		}
 	}
 
@@ -89,19 +89,19 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 
 	private void validarCPFValido(String cpf) throws ScpNegocioException {
 		if (!ValidadorCPFUtil.validaCPF(cpf)) {
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_CPF_INVALIDO.getProperty());
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_CPF_INVALIDO.getTexto());
 		}
 	}
 
 	private void validarCPFCadastrado(String cpf, Long idPessoa) throws ScpNegocioException {
 		if (isCpfCadastrado(cpf, idPessoa)) {
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_CPF_INVALIDO.getProperty());
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_CPF_JA_CADASTRADO.getTexto());
 		}
 	}
 
 	private void validarCPFPreenchido(String cpf) throws ScpNegocioException {
 		if (cpf == null) {
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_CPF_NAO_PREENCHIDO.getProperty());
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_CPF_NAO_PREENCHIDO.getTexto());
 		}
 	}
 
@@ -125,7 +125,7 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 			throw e;
 		} catch (Exception e) {
 			LOGGER.error(e.getLocalizedMessage());
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_ERRO_ALTERAR.getProperty()); 
+			throw new ScpNegocioException(Mensagens.MSG_PESSOA_ERRO_ALTERAR.getTexto()); 
 		}
 	}
 
@@ -144,7 +144,7 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 	public Pessoa recuperarPorId(Long id) throws PessoaNaoEncontradaException {
 		Optional<Pessoa> optPessoa = pessoaRepository.findById(id);
 		if (optPessoa.isEmpty()) {
-			throw new PessoaNaoEncontradaException(Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getProperty());
+			throw new PessoaNaoEncontradaException(Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getTexto());
 		}
 		return optPessoa.get();
 	}

@@ -15,7 +15,7 @@ import br.com.softplan.scpbackend.enums.SwaggerConstantes;
 
 @RestController
 @RequestMapping(value = "/usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsuarioController {
+public class UsuarioController implements IUsuarioController {
 
 	@PostMapping(value = "/autenticar", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> autenticar(@RequestBody UsuarioDTO usuarioDTO) {

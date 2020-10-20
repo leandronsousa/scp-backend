@@ -51,7 +51,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-	    String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getProperty();
+	    String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 	    assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -63,7 +63,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -75,7 +75,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_DATANASCIMENTO_INVALIDA.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -87,7 +87,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_NAO_PREENCHIDO.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_NAO_PREENCHIDO.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -99,7 +99,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_JA_CADASTRADO.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_JA_CADASTRADO.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -111,7 +111,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_NOME_NAO_PREENCHIDO.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_NOME_NAO_PREENCHIDO.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -123,7 +123,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.incluir(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_ERRO_INCLUIR.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_ERRO_INCLUIR.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -144,7 +144,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(ScpNegocioException.class, () -> {
 	        service.alterar(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_JA_CADASTRADO.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_CPF_JA_CADASTRADO.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -157,7 +157,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(PessoaNaoEncontradaException.class, () -> {
 	        service.alterar(pessoa);
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}
@@ -180,7 +180,7 @@ public class PessoaServiceTest {
 		Exception exception = assertThrows(PessoaNaoEncontradaException.class, () -> {
 	        service.recuperarPorId(anyLong());
 	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getProperty();
+		String mensagemEsperada = Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getTexto();
 	    String mensagemRetornada = exception.getMessage();
 		assertTrue(mensagemRetornada.contains(mensagemEsperada));
 	}

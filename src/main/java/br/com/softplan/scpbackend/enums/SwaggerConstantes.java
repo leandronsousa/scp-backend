@@ -52,5 +52,10 @@ public class SwaggerConstantes {
 	public static final String USUARIO_AUTENTICADO_SUCESSO = "Usuário autenticado com sucesso";
 	public static final String USUARIO_NAO_AUTENTICADO = "Usuário ou senha incorretos";
 	public static final String AUTENTICAR_USUARIO = "Autenticar Usuário";
+	
+	
+	public static final String API_SOURCE = "API referente ao repositório do projeto";
+	public static final String RETORNA_CODIGO_FONTE = "Retorna repositório do projeto";
+	public static final String CONSULTA_REPOSITORIO = "Consultar Repositório do projeto";
 
 }

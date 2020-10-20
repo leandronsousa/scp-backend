@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/source", produces = MediaType.APPLICATION_JSON_VALUE)
-public class SourceController {
+public class SourceController implements ISourceController {
 
 	@GetMapping
 	public ResponseEntity<String> retornarSourceCode() {
