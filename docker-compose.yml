@@ -1,3 +1,10 @@
-version: '19'
-services: scp-backend
-  build
+version: '2'
+services:
+  scp-backend:
+    image: leandronsousa/scp-backend
+    ports:
+      - "8080:8080"
+  scp-frontend:
+    image: leandronsousa/scp-frontend
+    ports:
+        - "4200:80"
