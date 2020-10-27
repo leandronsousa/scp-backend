@@ -1,5 +1,7 @@
 package br.com.softplan.scpbackend.controller;
 
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 
 import br.com.softplan.scpbackend.controller.dto.PessoaDTO;
@@ -30,7 +32,7 @@ public interface IPessoaController {
 	    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
 	})
 	@ApiOperation(value = SwaggerConstantes.CONSULTA_LISTA_PESSOAS)
-	ResponseEntity<?> listarPessoas();
+	CollectionModel<EntityModel<PessoaDTO>> listarPessoas();
 	
 	/**
 	 * Metodo da API responsavel por recuperar pessoa por ID
@@ -44,7 +46,7 @@ public interface IPessoaController {
 	    @ApiResponse(code = 500, message = SwaggerConstantes.ERRO_INTERNO),
 	})
 	@ApiOperation(value = SwaggerConstantes.CONSULTA_PESSOA_ID)
-	ResponseEntity<?> recuperarPessoaPorId(@ApiParam(value = SwaggerConstantes.ID_PESSOA) Long id);
+	EntityModel<PessoaDTO> recuperarPessoaPorId(@ApiParam(value = SwaggerConstantes.ID_PESSOA) Long id);
 	
 	/**
 	 * Metodo da API responsavel por incluir uma pessoa

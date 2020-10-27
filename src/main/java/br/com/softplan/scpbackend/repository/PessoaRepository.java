@@ -8,7 +8,7 @@ import br.com.softplan.scpbackend.entity.Pessoa;
 /**
  * @author leandro
  * 
- * Classe responsavel pelas acoes no bd referentes a entidade {@link Pessoa}
+ * Interface responsavel pelas acoes no bd referentes a entidade {@link Pessoa}
  * 
  */
 @Repository

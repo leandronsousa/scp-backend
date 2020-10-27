@@ -192,8 +192,9 @@ public class PessoaServiceTest {
 		Pessoa pessoa = getMockPessoa();
 		pessoa.setId(1L);
 		when(repository.findById(anyLong())).thenReturn(Optional.of(pessoa));
-		Pessoa pessoaRecuperada = service.recuperarPorId(anyLong());
-		assertEquals(pessoa.getId(), pessoaRecuperada.getId());
+		Optional<Pessoa> pessoaRecuperada = service.recuperarPorId(anyLong());
+		assertTrue(pessoaRecuperada.isPresent());
+		assertEquals(pessoa.getId(), pessoaRecuperada.get().getId());
 	}
 
 	private Pessoa getMockPessoa() {

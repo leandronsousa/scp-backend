@@ -39,7 +39,7 @@ public interface CrudService<T, ID extends Serializable> {
 	 * @param id
 	 * @return
 	 */
-	T recuperarPorId(ID id) throws ScpNegocioException;
+	Optional<T> recuperarPorId(ID id);
 
 	/**
 	 * Metodo responsavel por listar entidade

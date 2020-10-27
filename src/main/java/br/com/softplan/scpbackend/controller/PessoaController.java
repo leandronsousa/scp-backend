@@ -23,61 +23,50 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.softplan.scpbackend.controller.assembler.PessoaModelAssembler;
 import br.com.softplan.scpbackend.controller.dto.PessoaDTO;
 import br.com.softplan.scpbackend.controller.mapper.PessoaMapper;
 import br.com.softplan.scpbackend.entity.Pessoa;
+import br.com.softplan.scpbackend.enums.SwaggerConstantes;
 import br.com.softplan.scpbackend.exception.PessoaNaoEncontradaException;
 import br.com.softplan.scpbackend.exception.ScpNegocioException;
-import br.com.softplan.scpbackend.service.PessoaService;
+import br.com.softplan.scpbackend.service.IPessoaService;
 
 @RestController
 @RequestMapping(value = "/pessoas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PessoaController implements IPessoaController {
 
-	private @Autowired PessoaService service;
+	private @Autowired IPessoaService service;
 	
 	private @Autowired PessoaModelAssembler assembler;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(PessoaController.class);
 
 	@GetMapping
-	public ResponseEntity<?> listarPessoas() {
-		try {
-			List<EntityModel<PessoaDTO>> pessoas = PessoaMapper.converterListaPessoa(service.listar()).stream()
-					.map(assembler::toModel).collect(Collectors.toList());
-			return ResponseEntity.ok(CollectionModel.of(pessoas, linkTo(methodOn(PessoaController.class).listarPessoas()).withSelfRel()));
-		} catch (Exception e) {
-			LOGGER.error(e.getLocalizedMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+	public CollectionModel<EntityModel<PessoaDTO>> listarPessoas() {
+		List<EntityModel<PessoaDTO>> pessoas = PessoaMapper.converterListaPessoa(service.listar()).stream()
+				.map(assembler::toModel).collect(Collectors.toList());
+		return CollectionModel.of(pessoas, linkTo(methodOn(PessoaController.class).listarPessoas()).withSelfRel());
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?> recuperarPessoaPorId(@PathVariable Long id) {
-		try {
-    		PessoaDTO pessoa = PessoaMapper.converterPessoa(service.recuperarPorId(id));
-			return ResponseEntity.ok(assembler.toModel(pessoa));
-		} catch (PessoaNaoEncontradaException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			LOGGER.error(e.getLocalizedMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+	public EntityModel<PessoaDTO> recuperarPessoaPorId(@PathVariable Long id) {
+		Pessoa pessoa = service.recuperarPorId(id).orElseThrow(() -> new PessoaNaoEncontradaException());
+		return assembler.toModel(PessoaMapper.converterPessoa(pessoa));
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> incluirPessoa(@RequestBody PessoaDTO pessoaDTO) {
+	public  ResponseEntity<EntityModel<PessoaDTO>> incluirPessoa(@RequestBody PessoaDTO pessoaDTO) {
 		try {
 			Pessoa pessoa = service.incluir(PessoaMapper.converterPessoa(pessoaDTO));
 			EntityModel<PessoaDTO> entityModel = assembler.toModel(PessoaMapper.converterPessoa(pessoa));
 			return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
 		} catch (ScpNegocioException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getLocalizedMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getLocalizedMessage());
 		} catch (Exception e) {
-			LOGGER.error(e.getLocalizedMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, SwaggerConstantes.ERRO_INTERNO);
 		}
 	}
 
@@ -87,27 +76,19 @@ public class PessoaController implements IPessoaController {
 			Pessoa pessoa = service.alterar(PessoaMapper.converterPessoa(pessoaDTO));
 			return ResponseEntity.ok(PessoaMapper.converterPessoa(pessoa));
 		} catch (PessoaNaoEncontradaException e) {
-			return ResponseEntity.notFound().build();
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getLocalizedMessage());
 		} catch (ScpNegocioException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getLocalizedMessage());
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getLocalizedMessage());
 		} catch (Exception e) {
 			LOGGER.error(e.getLocalizedMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, SwaggerConstantes.ERRO_INTERNO);
 		}
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> excluirPessoa(@PathVariable Long id) {
-		try {
-			Pessoa pessoa = service.recuperarPorId(id);
-			service.excluir(pessoa);
-			return ResponseEntity.noContent().build();
-		} catch (PessoaNaoEncontradaException e) {
-			return ResponseEntity.notFound().build();
-		} catch (Exception e) {
-			LOGGER.error(e.getLocalizedMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+		service.excluirPorId(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }

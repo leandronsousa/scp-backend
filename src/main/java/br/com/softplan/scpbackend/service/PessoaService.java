@@ -21,7 +21,7 @@ import br.com.softplan.scpbackend.repository.PessoaRepository;
 import br.com.softplan.scpbackend.util.ValidadorCPFUtil;
 
 @Service
-public class PessoaService implements CrudService<Pessoa, Long> {
+public class PessoaService implements IPessoaService {
 
 	private @Autowired PessoaRepository pessoaRepository;
 	
@@ -116,20 +116,14 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Pessoa alterar(Pessoa pessoa) throws ScpNegocioException {
-		try {
-			Pessoa pessoaCadastrada = recuperarPorId(pessoa.getId());
+		return recuperarPorId(pessoa.getId()).map(pessoaCadastrada -> {
 			prepararPessoaParaAlteracao(pessoa, pessoaCadastrada);
 			validarPessoa(pessoaCadastrada);
 			return pessoaRepository.save(pessoaCadastrada);
-		} catch (ScpNegocioException e) {
-			throw e;
-		} catch (Exception e) {
-			LOGGER.error(e.getLocalizedMessage());
-			throw new ScpNegocioException(Mensagens.MSG_PESSOA_ERRO_ALTERAR.getTexto()); 
-		}
+		}).orElseThrow(() -> new PessoaNaoEncontradaException());
 	}
 
-	private void prepararPessoaParaAlteracao(Pessoa pessoa, Pessoa pessoaCadastrada) {
+	private void prepararPessoaParaAlteracao(final Pessoa pessoa, final Pessoa pessoaCadastrada) {
 		pessoaCadastrada.setNome(pessoa.getNome());
 		pessoaCadastrada.setCpf(RegExUtils.removePattern(pessoa.getCpf(), PatternsEnum.SOMENTE_NUMEROS.getPattern()));
 		pessoaCadastrada.setDataAtualizacao(LocalDateTime.now());
@@ -141,17 +135,14 @@ public class PessoaService implements CrudService<Pessoa, Long> {
 	}
 
 	@Override
-	public Pessoa recuperarPorId(Long id) throws PessoaNaoEncontradaException {
-		Optional<Pessoa> optPessoa = pessoaRepository.findById(id);
-		if (optPessoa.isEmpty()) {
-			throw new PessoaNaoEncontradaException(Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getTexto());
-		}
-		return optPessoa.get();
+	public Optional<Pessoa> recuperarPorId(Long id) {
+		return pessoaRepository.findById(id);
 	}
 	
 	@Override
 	public void excluirPorId(Long id) {
-		pessoaRepository.deleteById(id);
+		Pessoa pessoa = recuperarPorId(id).orElseThrow(() -> new PessoaNaoEncontradaException());
+		pessoaRepository.deleteById(pessoa.getId());
 	}
 	
 	@Override
