@@ -1,5 +1,6 @@
 package br.com.softplan.scpbackend.service;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -179,12 +180,8 @@ public class PessoaServiceTest {
 	@Test
 	public void testRecuperarPessoaNaoEncontrada() throws ScpNegocioException {
 		when(repository.findById(anyLong())).thenReturn(Optional.ofNullable(null));
-		Exception exception = assertThrows(PessoaNaoEncontradaException.class, () -> {
-	        service.recuperarPorId(anyLong());
-	    });
-		String mensagemEsperada = Mensagens.MSG_PESSOA_NAO_ENCONTRADA.getTexto();
-	    String mensagemRetornada = exception.getMessage();
-		assertTrue(mensagemRetornada.contains(mensagemEsperada));
+        Optional<Pessoa> pessoa = service.recuperarPorId(anyLong());
+		assertFalse(pessoa.isPresent());
 	}
 	
 	@Test
